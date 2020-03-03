@@ -16,6 +16,7 @@ function create(){
     jeu.world.initialiserWorld();
     jeu.player.initialiserPlayer();
     jeu.world.gererCamera();
+    jeu.world.gererCollider();
 }
 function update(time, delta){
     ajusterTailleEcran();
