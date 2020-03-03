@@ -19,7 +19,7 @@ function create(){
 }
 function update(time, delta){
     ajusterTailleEcran();
-    
+    jeu.player.gererDeplacement();
 }
 
 function ajusterTailleEcran(){
