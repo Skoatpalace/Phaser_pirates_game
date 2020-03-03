@@ -125,12 +125,15 @@ var player = {
                 this.speedY -= this.speedReduction;
             }
         }
-        this.aPlayer.setVelocityX(this.speedX);
-        this.aPlayer.setVelocityY(this.speedY);
-        this.aPlayer.barreRouge.x = this.aPlayer.x - this.aPlayer.barreRouge.width/2;
-        this.aPlayer.barreRouge.y = this.aPlayer.y;
-        this.aPlayer.barreVerte.x = this.aPlayer.x - this.aPlayer.barreVerte.width/2;
-        this.aPlayer.barreVerte.y = this.aPlayer.y;
+        if(this.isAlive){
+            this.aPlayer.setVelocityX(this.speedX);
+            this.aPlayer.setVelocityY(this.speedY);
+            this.aPlayer.barreRouge.x = this.aPlayer.x - this.aPlayer.barreRouge.width/2;
+            this.aPlayer.barreRouge.y = this.aPlayer.y;
+            this.aPlayer.barreVerte.x = this.aPlayer.x - this.aPlayer.barreVerte.width/2;
+            this.aPlayer.barreVerte.y = this.aPlayer.y;
+        }
+       
     },
     takeDamage : function(player,bullets){
         bullets.destroy();

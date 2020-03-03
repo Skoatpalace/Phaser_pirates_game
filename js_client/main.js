@@ -36,23 +36,26 @@ function create(){
     jeu.world.gererCollider();
     creerAnimations();
 
-    var e1 = jeu.ennemiTemplate.createEnnemi();
-    e1.initEnnemi(jeu.world.positionsEnnemis[0]);
-    jeu.ennemis.push(e1);
-    var e2 = jeu.ennemiTemplate.createEnnemi();
-    e2.initEnnemi(jeu.world.positionsEnnemis[1]);
-    jeu.ennemis.push(e2);
+    creerEnnemis();
 }
 function update(time, delta){
     ajusterTailleEcran();
     jeu.player.gererDeplacement();
     jeu.player.tirer();
-    ennemisTirer();
+    gererUpdateEnnemis();
 }
+function creerEnnemis(){
+    for (var i = 0 ; i < jeu.world.positionDebut.properties[0].value;i++){
+        var e1 = jeu.ennemiTemplate.createEnnemi();
+        e1.initEnnemi(jeu.world.positionsEnnemis[i]);
+        jeu.ennemis.push(e1);
+    }
 
-function ennemisTirer(){
+}
+function gererUpdateEnnemis(){
     for (var i = 0 ; i < jeu.ennemis.length;i++){
         jeu.ennemis[i].tirer();
+        jeu.ennemis[i].gererDeplacement();
     }
 }
 
