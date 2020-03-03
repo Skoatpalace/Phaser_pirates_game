@@ -64,6 +64,7 @@ var player = {
             this.gererMouvement();
             this.gererRotation();
         }
+       
     },
     gererBooleen : function(){
         if(this.keyD.isDown){
