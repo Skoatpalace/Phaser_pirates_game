@@ -11,6 +11,9 @@ function preload(){
     jeu.scene.load.image("tiles","tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("level1","level1.json");
     jeu.scene.load.image("player","shipG.png");
+    jeu.scene.load.image("debut","debut.png");
+    jeu.scene.load.image("fin","fin.png");
+    jeu.scene.load.image("cannonBall","cannonBall.png");
 }
 function create(){
     jeu.world.initialiserWorld();
@@ -21,6 +24,7 @@ function create(){
 function update(time, delta){
     ajusterTailleEcran();
     jeu.player.gererDeplacement();
+    jeu.player.tirer();
 }
 
 function ajusterTailleEcran(){
