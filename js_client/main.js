@@ -4,7 +4,8 @@ var jeu = {
     player : player,
     ennemiTemplate : ennemiTemplate,
     ennemis : [],
-    cursor : null
+    cursor : null,
+    level : 1,
 }
 
 
@@ -12,6 +13,7 @@ function preload(){
     jeu.scene = this;
     jeu.scene.load.image("tiles","tilesheet.png");
     jeu.scene.load.tilemapTiledJSON("level1","level1.json");
+    jeu.scene.load.tilemapTiledJSON("level2","level2.json");
     jeu.scene.load.image("player","player/player.png");
     jeu.scene.load.image("player2","player/player2.png");
     jeu.scene.load.image("player3","player/player3.png");
@@ -28,9 +30,12 @@ function preload(){
     jeu.scene.load.image("explosion1","explosion1.png");
     jeu.scene.load.image("explosion2","explosion2.png");
     jeu.scene.load.image("explosion3","explosion3.png");
+
+    jeu.scene.load.audio("explosionSound","explosion.ogg");
 }
 function create(){
     jeu.world.initialiserWorld();
+    jeu.world.isFinLevel = false;
     jeu.player.initialiserPlayer();
     jeu.world.gererCamera();
     jeu.world.gererCollider();
@@ -39,12 +44,15 @@ function create(){
     creerEnnemis();
 }
 function update(time, delta){
-    ajusterTailleEcran();
-    jeu.player.gererDeplacement();
-    jeu.player.tirer();
-    gererUpdateEnnemis();
+    if(!jeu.world.isFinLevel){
+        ajusterTailleEcran();
+        jeu.player.gererDeplacement();
+        jeu.player.tirer();
+        gererUpdateEnnemis();
+    }
 }
 function creerEnnemis(){
+    jeu.ennemis = [];
     for (var i = 0 ; i < jeu.world.positionDebut.properties[0].value;i++){
         var e1 = jeu.ennemiTemplate.createEnnemi();
         e1.initEnnemi(jeu.world.positionsEnnemis[i]);

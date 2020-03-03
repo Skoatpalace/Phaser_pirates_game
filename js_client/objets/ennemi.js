@@ -68,7 +68,7 @@ var ennemiTemplate = {
             },
             gererDeplacement : function(){
                 if(this.isAlive){
-                    if(this.goToFin && Math.abs(this.aEnnemi.x - this.targetPosition.x) > 10 && Math.abs(this.aEnnemi.y - this.targetPosition.y) > 10){
+                    if(this.goToFin && (Math.abs(this.aEnnemi.x - this.targetPosition.x) > 10 || Math.abs(this.aEnnemi.y - this.targetPosition.y) > 10)){
                         jeu.scene.physics.moveTo(this.aEnnemi, this.targetPosition.x,this.targetPosition.y,150);
                     } else {
                         if(this.goToFin) {
@@ -76,7 +76,7 @@ var ennemiTemplate = {
                             this.aEnnemi.setFlip(true,true);
                         }
                     }
-                    if(!this.goToFin && Math.abs(this.aEnnemi.x - this.startPosition.x) > 10 && Math.abs(this.aEnnemi.y - this.startPosition.y) > 10){
+                    if(!this.goToFin && (Math.abs(this.aEnnemi.x - this.startPosition.x) > 10 || Math.abs(this.aEnnemi.y - this.startPosition.y) > 10)){
                         jeu.scene.physics.moveTo(this.aEnnemi, this.startPosition.x,this.startPosition.y,150);
                     } else {
                         if(!this.goToFin) {
@@ -98,15 +98,19 @@ var ennemiTemplate = {
         jeu.scene.physics.world.removeCollider(ennemi.collisionBullet);
         var explo = [];
         explo.push(jeu.scene.physics.add.sprite(ennemi.x,ennemi.y).play("destruction"));
+        jeu.scene.sound.play("explosionSound");
         jeu.scene.time.delayedCall(200,function(){
             explo.push(jeu.scene.physics.add.sprite(ennemi.x-20,ennemi.y-20).play("destruction").setScale(0.5));
             explo.push(jeu.scene.physics.add.sprite(ennemi.x+20,ennemi.y+20).play("destruction").setScale(0.5));
+            jeu.scene.sound.play("explosionSound");
         },this);
         jeu.scene.time.delayedCall(400,function(){
             explo.push(jeu.scene.physics.add.sprite(ennemi.x+20,ennemi.y-20).play("destruction").setScale(0.8));
+            jeu.scene.sound.play("explosionSound");
         },this);
         jeu.scene.time.delayedCall(600,function(){
             explo.push(jeu.scene.physics.add.sprite(ennemi.x,ennemi.y).play("destruction").setScale(2));
+            jeu.scene.sound.play("explosionSound");
         },this);
         jeu.scene.time.delayedCall(900,function(){
             ennemi.barreRouge.destroy();

@@ -87,6 +87,8 @@ var player = {
         } else if (this.keyQ.isUp){
             this.gauche = false;
         }
+        if(this.keyShift.isDown) this.maxSpeed = 300;
+        if(this.keyShift.isUp) this.maxSpeed = 180;
     },
     gererMouvement : function(){
         if(this.gauche){
@@ -138,7 +140,7 @@ var player = {
     takeDamage : function(player,bullets){
         bullets.destroy();
         player.pv -= 10;
-        if(player.pv < 0)  {
+        if(player.pv <= 0)  {
             jeu.player.isAlive = false;
             player.pv = 0;
         }
@@ -199,7 +201,7 @@ var player = {
         }
     },
     tirer : function(){
-        if(this.isShooting){
+        if(this.isShooting && this.isAlive){
             if(jeu.scene.time.now > this.nextFire){
                 this.nextFire = jeu.scene.time.now  + this.fireRate;
                 var shoot = this.bullets.get(this.aPlayer.x,this.aPlayer.y)
